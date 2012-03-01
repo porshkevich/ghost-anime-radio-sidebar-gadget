@@ -1,0 +1,90 @@
+body {
+	height: 200px;
+	width: 130px;
+	padding: 0;
+	margin: 0;
+	/*border: 1px solid red;*/
+}
+
+body.docked {
+	height: 200px;
+	width: 130px;
+}
+
+body.undocked {
+	height: 300px;
+	width: 200px;
+}
+
+.docked > * {
+	top: 5px;
+	left: 4px;
+}
+
+.undocked > * {
+	top: 5px;
+	left: 4px;
+}
+
+#backgroundId {
+	position:absolute;
+	z-index:-1;
+}
+
+#gadgetContent {
+	position:absolute;
+	color: white;
+	z-index:1;
+}
+
+body.docked #gadgetContent {
+	top: 5px;
+	left: 4px;
+}
+
+body.undocked #gadgetContent {
+	top: 16px;
+	left: 17px;
+}
+
+#gar_img {
+	
+}
+
+#flyout_button {
+	opacity: 0.5;
+}
+
+.docked #flyout_button {
+	top: 25px;
+}
+
+#bar {
+	position:absolute;
+    z-index:2;
+    filter:alpha(opacity=0);
+    overflow:hidden;
+	background-image: url(../images/bg_sidebar.png);
+	width:112px;
+    height:23px;
+	padding-left: 4px;
+	padding-top: 3px;
+}
+
+.docked #bar {
+	top: 63px;
+	left: 3px;
+
+}
+
+#bar_volumeIn {
+	margin-left: 1px;
+}
+
+#bar_web {
+	margin-left: 8px;
+}
+
+#text {
+	color: red;
+}

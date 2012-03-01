@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gadget>
+  <name>Animeradio</name>
+  <namespace>animeradio</namespace>
+  <version>0.0.1</version>
+  <author name="NeoSonic">
+    <info url="" text="neosonic@inbox.ru"/>
+    <logo src="logo.png"/>
+  </author>
+  <copyright>© 2012</copyright>
+  <description>Animeradio</description>
+  <icons>
+    <icon height="48" width="48" src="logo.png"/>
+  </icons>
+  <hosts>
+    <host name="sidebar">
+      <base type="html" apiVersion="1.0.0" src="sample.html"/>
+      <permissions>full</permissions>
+      <platform minPlatformVersion="0.3"/>
+      <defaultImage src="drag.png"/>
+    </host>
+  </hosts>
+</gadget>
