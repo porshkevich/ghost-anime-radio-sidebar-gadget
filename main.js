@@ -72,6 +72,12 @@ function Init()
 		this.hideButton('pause');
 		this.showButton('play');
 	};
+	cBar.onVolumeDecrease = function() {
+		radio.addVolume(-5);
+	};
+	cBar.onVolumeIncrease = function() {
+		radio.addVolume(5);
+	};
 	//$('#gadgetContent').html(dump(System.Gadget.background));
 }
 

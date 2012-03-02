@@ -48,10 +48,6 @@ WMPlayer.prototype._Error = function() {
 		this.OnError();
 };
 
-WMPlayer.prototype._Status = function() {
-	  return this.player.status;
-};
-
 WMPlayer.prototype._updateBuffering = function()
 {
 	if (this.OnBuffering)
@@ -73,29 +69,11 @@ WMPlayer.prototype._Buffering = function(start)
 }
 
 //public methods
-WMPlayer.prototype.init = function()
-{
-	var mplayer = '<object id="MediaPlayer" height="0" width="0" classid="' + this._CLSID + '">';
-		mplayer += '<param name="autoStart" VALUE="True"/>';
-		mplayer += '<param NAME="URL" value=""/>';
-		mplayer += '<param NAME="uiMode" value="invisible"/>';
-		mplayer += '<EMBED type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" src="" align="top" width="0" height="0" autostart="False" autosize="0" showcontrols="0" showdisplay="0" EnableContextMenu="0" ShowStatusBar="0"></EMBED>';
-		mplayer += '</object>';
-//		mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = error()>';
-//		mplayer += '    Radio._Error();';
-//		mplayer += '</SCRIPT>';
-//		mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = buffering(Start)>'
-//		mplayer += '    Radio._Buffering(Start);';
-//		mplayer += '</SCRIPT>'
-//		mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = StatusChange()>'
-//		mplayer += '    Radio._Status();'
-//		mplayer += '</SCRIPT>'
-	var div = document.createElement("div");
-	div.id = "playerContainer";
-	document.body.appendChild(div);
-	div.innerHTML = mplayer;
-	var mp = document.getElementById("MediaPlayer");
-}
+
+// TODO check how get status of player
+WMPlayer.prototype.status = function() {
+	  return this.player.status;
+};
 
 WMPlayer.prototype.playURL = function(url)
 {
@@ -106,6 +84,7 @@ WMPlayer.prototype.playURL = function(url)
 
 WMPlayer.prototype.play = function()
 {
+	if ( this.player );
 	if (this._url)
 	{
 		this.player.URL = this._url;
@@ -121,6 +100,11 @@ WMPlayer.prototype.stop = function()
 WMPlayer.prototype.setVolume = function(volume)
 {
 	this.player.settings.volume = volume;
+}
+
+WMPlayer.prototype.addVolume = function(volume)
+{
+	this.player.settings.volume += volume;
 }
 
 /*
