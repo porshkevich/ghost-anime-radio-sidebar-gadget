@@ -14,14 +14,16 @@
 	<!--[if IE 9]>
 	<script language="javascript" type="text/javascript" src="js/MicrosoftAjax.debug.js"></script>
 	<script language="javascript" type="text/javascript" src="js/Sidebar.IntelliSense.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/ie9.css">
 	<![endif]-->
 </head>
 <body onload="Init()" class="docked">
 <g:background id="backgroundId" />
 	<div id="gadgetContent">
-		<embed height="25" type="application/x-shockwave-flash" width="120" src='http://animeradio.su/swf/head/day.swf'>
-		</embed>
-<!--		<img id="gar_img" src="images\gar.gif"/>-->
+		<object id="banner" type="application/x-shockwave-flash" data='swf/day.swf'>
+			<param name="movie" value="swf/day.swf"/>				
+			<img id="gar_img" src="images\gar.gif"/>
+		</object>
 		<div id="text"><pre>Проверка.</pre></div>
 		<div id="bar" ></div>
 	</div>

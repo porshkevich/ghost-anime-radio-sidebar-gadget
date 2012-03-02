@@ -7,13 +7,13 @@ body {
 }
 
 body.docked {
-	height: 200px;
+	height: 100px;
 	width: 130px;
 }
 
 body.undocked {
-	height: 300px;
-	width: 200px;
+	height: 280px;
+	width: 360px;
 }
 
 .docked > * {
@@ -37,14 +37,16 @@ body.undocked {
 	z-index:1;
 }
 
-body.docked #gadgetContent {
+.docked #gadgetContent {
 	top: 5px;
 	left: 4px;
 }
 
-body.undocked #gadgetContent {
+.undocked #gadgetContent {
 	top: 16px;
 	left: 17px;
+	height: 250px;
+	width: 320px;
 }
 
 #gar_img {
@@ -77,6 +79,12 @@ body.undocked #gadgetContent {
 
 }
 
+.undocked #bar {
+	top: 63px;
+	left: 3px;
+
+}
+
 #bar_volumeIn {
 	margin-left: 1px;
 }
@@ -87,4 +95,14 @@ body.undocked #gadgetContent {
 
 #text {
 	color: red;
+}
+
+.docked #banner {
+	width: 120px;
+	height: 25px;
+}
+
+.undocked #banner {
+	width: 320px;
+	height: 60px;
 }

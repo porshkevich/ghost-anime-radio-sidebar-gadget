@@ -31,6 +31,7 @@ function UnDock()
 	backgroundId.style.width = 0;
 	
 	$(document.body).removeClass("docked").addClass("undocked").css({height: '280px', width: '360px'});
+	//$('#banner').css({height: '280px', width: '360px'});
 	backgroundId.src="url(images/undocked_glass_frame.png)";
 }
 
