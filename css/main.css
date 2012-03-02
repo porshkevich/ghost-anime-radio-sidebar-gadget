@@ -88,3 +88,23 @@ body.undocked #gadgetContent {
 #text {
 	color: red;
 }
+
+#votebar {
+    height: 15px;
+    background-color: black;
+    border: 1px solid black;
+}
+#votebar .btn {
+    background: white;
+    border-radius: 2px;
+    float: left;
+    width: 14px;
+    height: 13px;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+    font-size: 10px;
+}
+#votebar .btn:hover {
+    background: gold;
+}
