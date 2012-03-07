@@ -20,11 +20,12 @@ function WMPlayer(opt) {
 	
 	
 
-        var mplayer = '<object id="MediaPlayer1" height="0" width="0" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6">';
+        var mplayer = '<object id="MediaPlayer1" height="0" width="0" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6" type="application/x-ms-wmp">';
             mplayer += '<param name="autoStart" VALUE="True"/>';
             mplayer += '<param NAME="URL" value=""/>';
             mplayer += '<param NAME="uiMode" value="invisible"/>';
-            mplayer += '<EMBED type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" src="" align="top" width="0" height="0" autostart="False" autosize="0" showcontrols="0" showdisplay="0" EnableContextMenu="0" ShowStatusBar="0"></EMBED>';
+			mplayer += '<param name="<b>SendPlayStateChangeEvents</b>" value="true"/>'
+            mplayer += '<EMBED type="application/x-ms-wmp" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" src="" align="top" width="0" height="0" autostart="False" autosize="0" showcontrols="0" showdisplay="0" EnableContextMenu="0" ShowStatusBar="0"></EMBED>';
             mplayer += '</object>';
 //            mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = error()>';
 //            mplayer += '    Radio._Error();';
@@ -35,11 +36,17 @@ function WMPlayer(opt) {
 //            mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = StatusChange()>'
 //            mplayer += '    Radio._Status();' 
 //            mplayer += '</SCRIPT>'
+//			  mplayer += '<SCRIPT for="MediaPlayer1" event="PlayStateChange(NewState)">';
+//			  mplayer += 'alert(NewState)';
+//			  mplayer += '</SCRIPT>';
         var div = document.createElement("div");
         div.id = "playerContainer";
         document.body.appendChild(div);
         div.innerHTML = mplayer;
 		this.player = document.getElementById("MediaPlayer1");
+		this.player.attachEvent('playStateChange', function(){
+			alert(self.player.currentMedia ? self.player.currentMedia.name : self.player.object.currentMedia.name)
+		});
 
 }
 
@@ -114,4 +121,9 @@ WMPlayer.prototype.addVolume = function(volume)
 WMPlayer.prototype.getVolume = function()
 {
 	return this.player.settings.volume;
+}
+
+WMPlayer.prototype.nowPlayed = function()
+{
+	return this.player.controls.currentItem;
 }

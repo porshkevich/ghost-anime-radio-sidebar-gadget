@@ -70,7 +70,7 @@ ControlBar.prototype.onButtonDown = function(action){
 		/*
 		 *  TODO: Back to the direct challenge to the 'on' event
 		 */
-		this.timerId = setInterval(function(){self.onButtonClick(action)}, 500);
+		this.timerId = setInterval(function(){self.onButtonClick(action)}, 250);
 	}
 };
 
