@@ -4,12 +4,16 @@ function WMPlayer(opt) {
 
 	var self = this;
 	
+	var empty_callback = function(){};
+	
     //public events
-    this.onError = ( 'onError' in opt && opt.onError ) ? opt.onError : null;
-    this.onStartBuffering = ( 'onStartBuffering' in opt && opt.onStartBuffering ) ? opt.onStartBuffering : null;
-    this.onEndBuffering = ( 'onEndBuffering' in opt && opt.onEndBuffering ) ? opt.onEndBuffering : null;
-    this.onBuffering = ( 'onBuffering' in opt && opt.onBuffering ) ? opt.onBuffering : null;
-    
+    this.onError = ( 'onError' in opt && opt.onError ) ? opt.onError : empty_callback;
+    this.onStartBuffering = ( 'onStartBuffering' in opt && opt.onStartBuffering ) ? opt.onStartBuffering : empty_callback;
+    this.onEndBuffering = ( 'onEndBuffering' in opt && opt.onEndBuffering ) ? opt.onEndBuffering : empty_callback;
+    this.onBuffering = ( 'onBuffering' in opt && opt.onBuffering ) ? opt.onBuffering : empty_callback;
+    this.onMediaChange = ( 'onMediaChange' in opt && opt.onMediaChange ) ? opt.onMediaChange : empty_callback;
+	this.onOpenStateChange = ( 'onOpenStateChange' in opt && opt.onOpenStateChange ) ? opt.onOpenStateChange : empty_callback;
+	this.onCurrentItemChange = ( 'onOpenStateChange' in opt && opt.onOpenStateChange ) ? opt.onOpenStateChange : empty_callback;
 	/*
 	 * @private 
 	 */
@@ -24,7 +28,8 @@ function WMPlayer(opt) {
             mplayer += '<param name="autoStart" VALUE="True"/>';
             mplayer += '<param NAME="URL" value=""/>';
             mplayer += '<param NAME="uiMode" value="invisible"/>';
-			mplayer += '<param name="<b>SendPlayStateChangeEvents</b>" value="true"/>'
+			mplayer += '<param name="<b>SendPlayStateChangeEvents</b>" value="true"/>';
+			mplayer += '<param name="<b>MediaChange</b>" value="true"/>';
             mplayer += '<EMBED type="application/x-ms-wmp" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" src="" align="top" width="0" height="0" autostart="False" autosize="0" showcontrols="0" showdisplay="0" EnableContextMenu="0" ShowStatusBar="0"></EMBED>';
             mplayer += '</object>';
 //            mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = error()>';
@@ -44,35 +49,36 @@ function WMPlayer(opt) {
         document.body.appendChild(div);
         div.innerHTML = mplayer;
 		this.player = document.getElementById("MediaPlayer1");
-		this.player.attachEvent('playStateChange', function(){
-			alert(self.player.currentMedia ? self.player.currentMedia.name : self.player.object.currentMedia.name)
+
+		// TODO: Kill onEvent style constraction
+		this.player.attachEvent('MediaChange', function(item){
+			self.onMediaChange(item);
+			$(self).trigger('mediachange',[item]);
 		});
-
-}
-
-WMPlayer.prototype._Error = function() {
-	if (this.OnError)
-		this.OnError();
-};
-
-WMPlayer.prototype._updateBuffering = function()
-{
-	if (this.OnBuffering)
-		this.OnBuffering(this.player.network.bufferingProgress);
-};
-
-WMPlayer.prototype._Buffering = function(start)
-{
-	if (true == start){ 
-		if (this.OnStartBuffering)
-			Radio.OnStartBuffering();
-		_bufferingTimerID = window.setInterval("Radio._updateBuffering()", 1);
-   }
-   else {
-	  if (Radio.OnEndBuffering)
-		Radio.OnEndBuffering()
-	  window.clearInterval(_bufferingTimerID);
-   }
+		this.player.attachEvent('OpenStateChange', function(item){
+			self.onOpenStateChange(item);
+			$(self).trigger('openstatechange',[item]);
+		});
+		this.player.attachEvent('CurrentItemChange', function(item){
+			self.onCurrentItemChange(item);
+			$(self).trigger('currentitemchange',[item]);
+		});
+		this.player.attachEvent('Buffering', function(start){
+			self.onBuffering();
+			$(self).trigger('buffering',[item]);
+			if ( start ) {
+				self.onBufferingStart;
+				$(self).trigger('bufferingstart',[item]);
+			}
+			else {
+				self.onBufferingEnd;
+				$(self).trigger('bufferingend',[item]);
+			}
+		});
+		this.player.attachEvent('Error', function(){
+			self.onError();
+			self.trigger('error');
+		});
 }
 
 //public methods
