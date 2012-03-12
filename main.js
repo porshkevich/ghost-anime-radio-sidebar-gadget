@@ -4,6 +4,8 @@ jQuery.support.cors = true;
 
 $(document).ready(function() {
 	animeradio = new AnimeRadioGadget();
+	
+	
 }); 
 
 function checkVisibility()

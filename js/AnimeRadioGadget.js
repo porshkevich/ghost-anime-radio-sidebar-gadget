@@ -1,14 +1,22 @@
 /*
- * @class AnimeRadioGadget
+ * @class
+ * 
+ * @description
+ * 
  * @inherits JSGadget
  */
 
 function AnimeRadioGadget() {
-	JSGadget.apply(this, arguments);
+	
+	JSGadget.call(this);
 	
 	var self = this;
 	
-	this.radio = new WMPlayer();
+	this.radio = new WMPlayer({
+		onOpenStateChange: function(item){
+			//log(item);
+		}
+	});
 	this.cBar = new ControlBar({
 							container: $('div#bar'),
 							buttons: ['volumeDe','play','pause','volumeIn',{name:'web',callback:function(){window.open("http://animeradio.su")}}]
@@ -31,11 +39,10 @@ function AnimeRadioGadget() {
 	};
 	
 	$(this.radio).bind('mediachange', function(e, item){
-		log(item.name);
+		self.onUpdateTrack(item.name);
+		//log(item.name);
 	});
-	this.radio.onOpenStateChange = function(item){
-		log(item);
-	}
+	
 }
 
 AnimeRadioGadget.prototype = new JSGadget();
@@ -53,4 +60,28 @@ AnimeRadioGadget.prototype.onUnDock = function(){
 	$(document.body).removeClass("docked").addClass("undocked").css({height: '280px', width: '360px'});
 	//$('#banner').css({height: '280px', width: '360px'});
 	backgroundId.src="url(images/undocked_glass_frame.png)";
+};
+
+AnimeRadioGadget.prototype.onUpdateTrack = function(name){
+	if ( this.currenttrack == name ) return false;
+	
+	this.currenttrack = name;
+	$('#trackname').html(name);
+	this.scrollTrackName();
+};
+
+AnimeRadioGadget.prototype.scrollTrackName = function(){
+	var self = this;
+	
+	var offset = $('#trackname')[0].offsetWidth - $('#trackinfo')[0].offsetWidth;
+	
+	var q = 0.2;
+	
+	if ( offset > 0 ) 
+		$('#trackname').stop(true)
+		.animate({left: -offset}, offset*50*((Math.exp(-(offset*offset/(2*q*q)))/(Math.sqrt(2*Math.PI)*q))+1))
+		.animate({left: 0}, offset*50*((Math.exp(-(offset*offset/(2*q*q)))/(Math.sqrt(2*Math.PI)*q))+1), function(){
+			setTimeout(function(){self.scrollTrackName();}, 100);
+		});
+	log('offset:'+ offset +' ' + 'time:' + offset*50*((Math.exp(-(offset*offset/(2*q*q)))/(Math.sqrt(2*Math.PI)*q))+1));
 };

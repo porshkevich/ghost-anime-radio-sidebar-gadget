@@ -51,7 +51,7 @@ body.undocked {
 .undocked #gadgetContent {
 	top: 16px;
 	left: 17px;
-	height: 250px;
+	height: 240px;
 	width: 320px;
 }
 
@@ -112,3 +112,29 @@ body.undocked {
 	width: 320px;
 	height: 60px;
 }
+
+#trackinfo {
+	position:absolute;
+    z-index:2;
+	overflow: hidden;
+	background: none no-repeat transparent;
+	width: 100%;
+	height: 20px;
+}
+
+.undocked #trackinfo {
+	top: 190px;
+}
+
+.docked #trackinfo {
+	top: 50px;
+}
+
+#trackname {
+	position:absolute;
+    z-index:2;
+    overflow:hidden;
+	background: none no-repeat transparent;
+	white-space: nowrap;
+}
+

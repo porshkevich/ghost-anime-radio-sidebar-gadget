@@ -1,3 +1,8 @@
+/*
+ * @class WMPlayer
+ * @description Object to control the Emded Windows Media Player
+ */
+
 function WMPlayer(opt) {
 	
 	if (opt == undefined) opt = {};
@@ -13,7 +18,7 @@ function WMPlayer(opt) {
     this.onBuffering = ( 'onBuffering' in opt && opt.onBuffering ) ? opt.onBuffering : empty_callback;
     this.onMediaChange = ( 'onMediaChange' in opt && opt.onMediaChange ) ? opt.onMediaChange : empty_callback;
 	this.onOpenStateChange = ( 'onOpenStateChange' in opt && opt.onOpenStateChange ) ? opt.onOpenStateChange : empty_callback;
-	this.onCurrentItemChange = ( 'onOpenStateChange' in opt && opt.onOpenStateChange ) ? opt.onOpenStateChange : empty_callback;
+	this.onCurrentItemChange = ( 'onCurrentItemChange' in opt && opt.onCurrentItemChange ) ? opt.onCurrentItemChange : empty_callback;
 	/*
 	 * @private 
 	 */
