@@ -1,4 +1,4 @@
-<PUBLIC:COMPONENT>
+﻿<PUBLIC:COMPONENT>
 <!--<PUBLIC:ATTACH EVENT="onmouseover" ONEVENT="Hilite()" />
 <PUBLIC:ATTACH EVENT="onmouseout"  ONEVENT="Restore()" />-->
 <ATTACH EVENT="ondocumentready" HANDLER="DocumentReady" />

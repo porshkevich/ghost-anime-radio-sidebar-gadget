@@ -1,4 +1,4 @@
-body, html, * {
+﻿body, html, * {
 	padding: 0;
 	margin: 0;
 	/*border: 1px solid red;*/
@@ -56,7 +56,7 @@ body.undocked {
 }
 
 #gar_img {
-	
+
 }
 
 #flyout_button {
@@ -118,16 +118,17 @@ body.undocked {
     z-index:2;
 	overflow: hidden;
 	background: none no-repeat transparent;
-	width: 100%;
 	height: 20px;
 }
 
 .undocked #trackinfo {
 	top: 190px;
+
 }
 
 .docked #trackinfo {
-	top: 50px;
+	top: 45px;
+	width: 120px;
 }
 
 #trackname {

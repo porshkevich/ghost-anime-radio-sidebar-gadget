@@ -1,4 +1,4 @@
-function ControlBar(opt) {
+﻿function ControlBar(opt) {
 	var i;
 	var self = this;
 	
@@ -25,7 +25,7 @@ function ControlBar(opt) {
 			focusout: this.hide});
 	}
 	
-	// ToDo: ���� ��� ������� ������������ ���������� ����� 1
+	// ToDo: пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 1
 	this.container.animate({opacity: 0},'fast');
 	
 	$('body').mouseover(function(){self.show()});

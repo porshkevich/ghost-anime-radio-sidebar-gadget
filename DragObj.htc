@@ -1,4 +1,4 @@
-<PUBLIC:COMPONENT>
+﻿<PUBLIC:COMPONENT>
 <PUBLIC:ATTACH FOR="document" EVENT="onmousedown"  ONEVENT="DocumentMouseDown()" />
 <PUBLIC:ATTACH FOR="document" EVENT="onmouseup"    ONEVENT="DocumentMouseUp()" />
 <PUBLIC:ATTACH FOR="document" EVENT="onmouseout"    ONEVENT="DocumentMouseOut()" />
