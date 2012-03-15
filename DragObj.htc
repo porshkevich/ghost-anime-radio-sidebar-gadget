@@ -1,4 +1,4 @@
-﻿<PUBLIC:COMPONENT>
+<PUBLIC:COMPONENT>
 <PUBLIC:ATTACH FOR="document" EVENT="onmousedown"  ONEVENT="DocumentMouseDown()" />
 <PUBLIC:ATTACH FOR="document" EVENT="onmouseup"    ONEVENT="DocumentMouseUp()" />
 <PUBLIC:ATTACH FOR="document" EVENT="onmouseout"    ONEVENT="DocumentMouseOut()" />
@@ -7,31 +7,31 @@
 <PUBLIC:EVENT NAME="ondragmousemove" ID="eventOnMouseDragMove" />
 <PUBLIC:PROPERTY NAME="offsetMouse" />
 <SCRIPT LANGUAGE="JScript">
-    var StartDragPosition = 
+    var StartDragPosition =
     {
         x:0,
         y:0
     }
     function DocumentMouseDown()
     {
-        
+
     }
-    
+
     function DocumentMouseUp()
     {
         window["dragObj"] = null;
     }
-    
+
     function DocumentMouseOut()
     {
 
     }
-    
-    function DocumentMouseMove() 
+
+    function DocumentMouseMove()
     {
         if (window["dragObj"])
         {
-            var defPosition = 
+            var defPosition =
             {
                 x: event.clientX - StartDragPosition.x,
                 y: event.clientY - StartDragPosition.Y
@@ -43,9 +43,9 @@
             eventOnMouseDragMove.fire(oEvent);
         }
     }
-    
+
     function MouseDown()
-    {   
+    {
         window["dragObj"] = this.element;
         StartDragPosition.x = event.clientX;
         StartDragPosition.y = event.clientY;

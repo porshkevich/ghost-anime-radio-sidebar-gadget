@@ -1,4 +1,4 @@
-﻿<PUBLIC:COMPONENT>
+<PUBLIC:COMPONENT>
 <!--<PUBLIC:ATTACH EVENT="onmouseover" ONEVENT="Hilite()" />
 <PUBLIC:ATTACH EVENT="onmouseout"  ONEVENT="Restore()" />-->
 <ATTACH EVENT="ondocumentready" HANDLER="DocumentReady" />
@@ -62,14 +62,14 @@
     {
         mouseIsDown = false;
     }
-    
+
     function tick()
     {
         MouseUp();
     }
-    
+
     function MouseClick()
-    {   
+    {
         if (imageAfterClick && isImageAfterClick)
         {
             currentImage = image;
@@ -82,7 +82,7 @@
         }
         isImageAfterClick =!isImageAfterClick;
     }
-    
+
     function MouseDblClick()
     {
         MouseClick();
