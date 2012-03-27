@@ -4,13 +4,13 @@
  */
 
 function WMPlayer(opt) {
-	
+
 	if (opt == undefined) opt = {};
 
 	var self = this;
-	
+
 	var empty_callback = function(){};
-	
+
     //public events
     this.onError = ( 'onError' in opt && opt.onError ) ? opt.onError : empty_callback;
     this.onStartBuffering = ( 'onStartBuffering' in opt && opt.onStartBuffering ) ? opt.onStartBuffering : empty_callback;
@@ -20,14 +20,14 @@ function WMPlayer(opt) {
 	this.onOpenStateChange = ( 'onOpenStateChange' in opt && opt.onOpenStateChange ) ? opt.onOpenStateChange : empty_callback;
 	this.onCurrentItemChange = ( 'onCurrentItemChange' in opt && opt.onCurrentItemChange ) ? opt.onCurrentItemChange : empty_callback;
 	/*
-	 * @private 
+	 * @private
 	 */
 	this.player = null;
 	this.CLSID = '6BF52A52-394A-11d3-B153-00C04F79FAA6';
     var _bufferingTimerID = 0;
     var _url = "";
-	
-	
+
+
 
         var mplayer = '<object id="MediaPlayer1" height="0" width="0" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6" type="application/x-ms-wmp">';
             mplayer += '<param name="autoStart" VALUE="True"/>';
@@ -44,7 +44,7 @@ function WMPlayer(opt) {
 //            mplayer += '    Radio._Buffering(Start);';
 //            mplayer += '</SCRIPT>'
 //            mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = StatusChange()>'
-//            mplayer += '    Radio._Status();' 
+//            mplayer += '    Radio._Status();'
 //            mplayer += '</SCRIPT>'
 //			  mplayer += '<SCRIPT for="MediaPlayer1" event="PlayStateChange(NewState)">';
 //			  mplayer += 'alert(NewState)';
@@ -107,7 +107,7 @@ WMPlayer.prototype.play = function()
 	{
 		this.player.URL = this._url;
 		this.player.controls.play();
-	}        
+	}
 }
 
 WMPlayer.prototype.stop = function()

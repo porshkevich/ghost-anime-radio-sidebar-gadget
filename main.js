@@ -3,7 +3,9 @@ debugger;
 jQuery.support.cors = true;
 
 $(document).ready(function() {
-	animeradio = new AnimeRadioGadget();
+	animeradio = new AnimeRadioGadget({
+		timeSwfUpdate: 300
+	});
 
 
 });

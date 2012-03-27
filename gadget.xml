@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <gadget>
   <name>Ghost Аниме Радио</name>
   <namespace>ghostanimeradio</namespace>
-  <version>0.0.0.3</version>
+  <version>0.0.0.4</version>
   <author name="NeoSonic">
-    <info url="" text="neosonic@inbox.ru"/>
+    <info url="mailto:neosonic@inbox.ru" text="neosonic@inbox.ru"/>
     <logo src="logo.png"/>
   </author>
   <copyright>© 2012</copyright>
