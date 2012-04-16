@@ -160,12 +160,12 @@ AnimeRadioGadget.prototype.parseIndexTable = function(){
 		url: "http://animeradio.su/ajax.php?a=index_table",
 		cache: false,
 		success: function(msg){
-			self.trackinfo.name = $('td:contains(РЎРµР№С‡Р°СЃ РІ СЌС„РёСЂРµ) + td', msg).html();
-			self.trackinfo.fromanime = $('td:contains(РўСЂРµРє РёР· Р°РЅРёРјРµ) + td', msg).html();
-			self.trackinfo.orderedby = $('td:contains(Р—Р°РєР°Р·С‡РёРє) + td', msg).html();
-			self.trackinfo.quality_s = $('td:contains(РљР°С‡РµСЃС‚РІРѕ РІРµС‰Р°РЅРёСЏ) + td', msg).html();
-			self.trackinfo.quality_n = parseInt($('td:contains(РљР°С‡РµСЃС‚РІРѕ РІРµС‰Р°РЅРёСЏ) + td', msg).html(), 10);
-			self.trackinfo.listeners = parseInt($('td:contains(РЎР»СѓС€Р°С‚РµР»РµР№) + td', msg).html(), 10);
+			self.trackinfo.name = $('td:contains(Сейчас в эфире) + td', msg).html();
+			self.trackinfo.fromanime = $('td:contains(Трек из аниме) + td', msg).html();
+			self.trackinfo.orderedby = $('td:contains(Заказчик) + td', msg).html();
+			self.trackinfo.quality_s = $('td:contains(Качество вещания) + td', msg).html();
+			self.trackinfo.quality_n = parseInt($('td:contains(Качество вещания) + td', msg).html(), 10);
+			self.trackinfo.listeners = parseInt($('td:contains(Слушателей) + td', msg).html(), 10);
 			self.trackinfo.rating = parseInt($('li.current-rating:contains(Currently)', msg).html().replace('Currently ', ''), 10);
 			var ajax_data = $('input[name=ajax_data]', msg);
 			if ( ajax_data.length > 0 ) {
