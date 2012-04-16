@@ -1,0 +1,91 @@
+<PUBLIC:COMPONENT>
+<!--<PUBLIC:ATTACH EVENT="onmouseover" ONEVENT="Hilite()" />
+<PUBLIC:ATTACH EVENT="onmouseout"  ONEVENT="Restore()" />-->
+<ATTACH EVENT="ondocumentready" HANDLER="DocumentReady" />
+<PUBLIC:ATTACH EVENT="onmousedown"  ONEVENT="MouseDown()" />
+<PUBLIC:ATTACH EVENT="onmouseup"  ONEVENT="MouseUp()" />
+<PUBLIC:ATTACH EVENT="onmouseout"  ONEVENT="MouseOut()" />
+<PUBLIC:ATTACH EVENT="onmouseover"  ONEVENT="MouseOver()" />
+<PUBLIC:ATTACH EVENT="onclick"  ONEVENT="MouseClick()" />
+<PUBLIC:ATTACH EVENT="ondblclick"  ONEVENT="MouseDblClick()" />
+<PUBLIC:ATTACH FOR="document" EVENT="onmouseup"  ONEVENT="DocumentMouseUp()" />
+<PUBLIC:METHOD NAME="tick" />
+<PUBLIC:PROPERTY NAME="image" />
+<PUBLIC:PROPERTY NAME="imageWhenMouseDown" />
+<PUBLIC:PROPERTY NAME="imageAfterClick" />
+
+<SCRIPT LANGUAGE="JScript">
+    var normalColor, normalSpacing;
+    var imageElement = null;
+    var mouseIsDown = false;
+    var isImageAfterClick = false;
+    var currentImage = null;
+    function DocumentReady()
+    {
+        currentImage = image;
+        imageElement = document.createElement("img");
+        imageElement.setAttribute("src", currentImage);
+        element.appendChild(imageElement);
+        //element.style.border = "1px solid black;"
+        element.style.width = "0"
+        element.style.height = "0"
+        element.style.overflo="visible";
+        element.style.backgroundColor = "Transparent";
+        window.ttt = "fsdf";
+    }
+
+    function MouseDown()
+    {
+        imageElement.setAttribute("src", imageWhenMouseDown);
+        mouseIsDown = true;
+    }
+
+    function MouseOut()
+    {
+        imageElement.setAttribute("src", currentImage);
+    }
+
+    function MouseOver()
+    {
+        if (mouseIsDown)
+        {
+            imageElement.setAttribute("src", imageWhenMouseDown);
+        }
+    }
+
+    function MouseUp()
+    {
+        imageElement.setAttribute("src", currentImage);
+    }
+
+    function DocumentMouseUp()
+    {
+        mouseIsDown = false;
+    }
+
+    function tick()
+    {
+        MouseUp();
+    }
+
+    function MouseClick()
+    {
+        if (imageAfterClick && isImageAfterClick)
+        {
+            currentImage = image;
+            imageElement.setAttribute("src", currentImage);
+        }
+        else if (imageAfterClick && !isImageAfterClick)
+        {
+            currentImage = imageAfterClick;
+            imageElement.setAttribute("src", currentImage);
+        }
+        isImageAfterClick =!isImageAfterClick;
+    }
+
+    function MouseDblClick()
+    {
+        MouseClick();
+    }
+</SCRIPT>
+</PUBLIC:COMPONENT>

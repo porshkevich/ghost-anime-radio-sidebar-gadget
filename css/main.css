@@ -1,0 +1,184 @@
+body, html, * {
+	padding: 0;
+	margin: 0;
+	/*border: 1px solid red;*/
+}
+
+body {
+	height: 100px;
+	width: 130px;
+	padding: 0;
+	margin: 0;
+	/*border: 1px solid red;*/
+}
+
+body.docked {
+	height: 100px;
+	width: 130px;
+}
+
+body.undocked {
+	height: 280px;
+	width: 360px;
+}
+
+.docked > * {
+	top: 5px;
+	left: 4px;
+}
+
+.undocked > * {
+	top: 5px;
+	left: 4px;
+}
+
+#backgroundId {
+	position:absolute;
+	z-index:-1;
+}
+
+#gadgetContent {
+	position:absolute;
+	color: white;
+	z-index:1;
+}
+
+.docked #gadgetContent {
+	top: 5px;
+	left: 4px;
+}
+
+.undocked #gadgetContent {
+	top: 16px;
+	left: 17px;
+	height: 240px;
+	width: 320px;
+}
+
+#gar_img {
+
+}
+
+#flyout_button {
+	opacity: 0.5;
+}
+
+.docked #flyout_button {
+	top: 25px;
+}
+
+#bar {
+	position:absolute;
+    z-index:2;
+    filter:alpha(opacity=0);
+    overflow:hidden;
+	background: url(../images/bg_sidebar.png) no-repeat transparent;
+	width:112px;
+    height:22px;
+	padding-left: 4px;
+	padding-top: 3px;
+}
+
+.docked #bar {
+	top: 63px;
+	left: 3px;
+
+}
+
+.undocked #bar {
+	top: 210px;
+	left: 107px;
+
+}
+
+#bar_volumeIn {
+	margin-left: 1px;
+}
+
+#bar_web {
+	margin-left: 8px;
+}
+
+#text {
+	color: red;
+}
+
+.docked #banner {
+	width: 120px;
+	height: 25px;
+}
+
+.undocked #banner {
+	width: 320px;
+	height: 60px;
+}
+
+#shorttrackinfo {
+	position:absolute;
+    z-index:2;
+	overflow: hidden;
+	background: none no-repeat transparent;
+	height: 20px;
+	width: 120px;
+	left: 0px;
+}
+
+.undocked #shorttrackinfo {
+	display: none;
+}
+
+.docked #shorttrackinfo {
+	top: 45px;
+	width: 120px;
+}
+
+#shorttrackinfo.down {
+	top: 65px;
+}
+
+#trackname {
+	position:absolute;
+    z-index:2;
+    overflow:hidden;
+	background: none no-repeat transparent;
+	white-space: nowrap;
+}
+
+#votebar {
+	position:absolute;
+    z-index:1;
+    filter:alpha(opacity=0);
+    overflow:hidden;
+	background: url(../images/cont2.png) 0px -3px no-repeat #ffffff;
+	width:120px;
+    height:25px;
+	padding: 5px 12px;
+}
+
+.docked #votebar {
+	top: 25px;
+	left: 0px;
+
+}
+
+.undocked #votebar {
+	top: 210px;
+	left: 107px;
+
+}
+
+.votebutton {
+	background: url(../images/stars.png) no-repeat transparent;
+	height: 10px;
+	width: 10px;
+	border: 1px solid transparent;
+/*	margin-left: 1px;*/
+}
+
+.votebutton.polled  {
+	background-position-y: -20px;
+}
+
+.votebutton.hover, .votebutton.polled.hover {
+	background-position-y: -10px;
+}
