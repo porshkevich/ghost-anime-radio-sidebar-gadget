@@ -53,11 +53,13 @@ function AnimeRadioGadget(opt) {
 
 	$(this.cBar).bind('show', function(e){
 		$('#shorttrackinfo').removeClass('down');
+        $('#trackinfo').removeClass('down').addClass('up');
 		//log(item.name);
 	});
 
 	$(this.cBar).bind('hide', function(e){
 		$('#shorttrackinfo').addClass('down');
+        $('#trackinfo').addClass('down').removeClass('up');
 		//log(item.name);
 	});
 
@@ -127,15 +129,20 @@ AnimeRadioGadget.prototype.onUpdateTrack = function(name){
 };
 
 AnimeRadioGadget.prototype.onUpdateTrackInfo = function(){
-
-
-
 	this.vBar.newVote(this.trackinfo);
 
-
 	$('#trackname').html(this.trackinfo.name);
-	this.scrollTrackName();
 
+    var content = '';
+    content += '<table>';
+    content += '<tr><td>Трек из аниме</td><td>' + this.trackinfo.fromanime + '</td></tr>';
+    content += '<tr><td>Заказчик</td><td>' + (this.trackinfo.orderedby?this.trackinfo.orderedby:"") + '</td></tr>';
+    content += '<tr id="quality"><td>Качество вещания</td><td>' + this.trackinfo.quality_s + '</td></tr>';
+    content += '<tr><td>Слушателей</td><td>' + this.trackinfo.listeners + '</td></tr>';
+    content += '</table>';
+    $('#trackinfo').html(content);
+
+	this.scrollTrackName();
 };
 
 AnimeRadioGadget.prototype.scrollTrackName = function(){

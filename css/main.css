@@ -59,6 +59,10 @@ body.undocked {
 
 }
 
+.undocked #gar_img {
+    width: 320px;
+}
+
 #flyout_button {
 	opacity: 0.5;
 }
@@ -82,13 +86,11 @@ body.undocked {
 .docked #bar {
 	top: 63px;
 	left: 3px;
-
 }
 
 .undocked #bar {
 	top: 210px;
 	left: 107px;
-
 }
 
 #bar_volumeIn {
@@ -124,7 +126,8 @@ body.undocked {
 }
 
 .undocked #shorttrackinfo {
-	display: none;
+    width: 316px;
+    margin-left: 2px;
 }
 
 .docked #shorttrackinfo {
@@ -132,8 +135,16 @@ body.undocked {
 	width: 120px;
 }
 
+.undocked #shorttrackinfo {
+	top: 120px;
+}
+
 #shorttrackinfo.down {
 	top: 65px;
+}
+
+.undocked #shorttrackinfo.down {
+	top: 70px;
 }
 
 #trackname {
@@ -158,13 +169,15 @@ body.undocked {
 .docked #votebar {
 	top: 25px;
 	left: 0px;
-
 }
 
 .undocked #votebar {
-	top: 210px;
-	left: 107px;
-
+    background: url("../images/votebar_cont.png") no-repeat scroll 0 -3px #FFFFFF;
+    height: 65px;
+    left: 18px;
+    top: 60px;
+    width: 280px;
+    padding: 15px 20px;
 }
 
 .votebutton {
@@ -175,10 +188,67 @@ body.undocked {
 /*	margin-left: 1px;*/
 }
 
+.undocked .votebutton {
+	background: url(../images/starrating.gif) no-repeat transparent;
+	height: 30px;
+	width: 28px;
+	border: 1px solid transparent;
+/*	margin-left: 1px;*/
+}
+
 .votebutton.polled  {
 	background-position-y: -20px;
 }
 
+.undocked .votebutton.polled  {
+	background-position-y: -60px;
+}
+
 .votebutton.hover, .votebutton.polled.hover {
 	background-position-y: -10px;
+}
+
+.undocked .votebutton.hover, .undocked .votebutton.polled.hover {
+	background-position-y: -30px;
+}
+
+#trackinfo {
+	position: absolute;
+    z-index: 2;
+	overflow: hidden;
+	background: none no-repeat transparent;
+	left: 0px;
+}
+
+.docked #trackinfo {
+    display: none;
+}
+
+
+.undocked #trackinfo {
+    top: 140px;
+}
+
+.undocked #trackinfo.up #quality {
+    display: none;
+}
+
+.undocked #trackinfo.down {
+    top: 100px;
+}
+
+.undocked #trackinfo.down #quality{
+    display: table-row;
+}
+
+.undocked #trackinfo table {
+    width: 316px;
+    margin-left: 2px;
+}
+
+#trackinfo table tr td {
+    color: white;
+    font-size: 0.9em;
+    vertical-align: top;
+    background-color: #101010;
 }
