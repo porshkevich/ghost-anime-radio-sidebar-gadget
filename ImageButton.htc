@@ -62,14 +62,14 @@
     {
         mouseIsDown = false;
     }
-    
+
     function tick()
     {
         MouseUp();
     }
-    
+
     function MouseClick()
-    {   
+    {
         if (imageAfterClick && isImageAfterClick)
         {
             currentImage = image;
@@ -82,7 +82,7 @@
         }
         isImageAfterClick =!isImageAfterClick;
     }
-    
+
     function MouseDblClick()
     {
         MouseClick();

@@ -1,30 +1,41 @@
+/*
+ * @class WMPlayer
+ * @description Object to control the Emded Windows Media Player
+ */
+
 function WMPlayer(opt) {
-	
+
 	if (opt == undefined) opt = {};
 
 	var self = this;
-	
+
+	var empty_callback = function(){};
+
     //public events
-    this.onError = ( 'onError' in opt && opt.onError ) ? opt.onError : null;
-    this.onStartBuffering = ( 'onStartBuffering' in opt && opt.onStartBuffering ) ? opt.onStartBuffering : null;
-    this.onEndBuffering = ( 'onEndBuffering' in opt && opt.onEndBuffering ) ? opt.onEndBuffering : null;
-    this.onBuffering = ( 'onBuffering' in opt && opt.onBuffering ) ? opt.onBuffering : null;
-    
+    this.onError = ( 'onError' in opt && opt.onError ) ? opt.onError : empty_callback;
+    this.onStartBuffering = ( 'onStartBuffering' in opt && opt.onStartBuffering ) ? opt.onStartBuffering : empty_callback;
+    this.onEndBuffering = ( 'onEndBuffering' in opt && opt.onEndBuffering ) ? opt.onEndBuffering : empty_callback;
+    this.onBuffering = ( 'onBuffering' in opt && opt.onBuffering ) ? opt.onBuffering : empty_callback;
+    this.onMediaChange = ( 'onMediaChange' in opt && opt.onMediaChange ) ? opt.onMediaChange : empty_callback;
+	this.onOpenStateChange = ( 'onOpenStateChange' in opt && opt.onOpenStateChange ) ? opt.onOpenStateChange : empty_callback;
+	this.onCurrentItemChange = ( 'onCurrentItemChange' in opt && opt.onCurrentItemChange ) ? opt.onCurrentItemChange : empty_callback;
 	/*
-	 * @private 
+	 * @private
 	 */
 	this.player = null;
 	this.CLSID = '6BF52A52-394A-11d3-B153-00C04F79FAA6';
     var _bufferingTimerID = 0;
     var _url = "";
-	
-	
 
-        var mplayer = '<object id="MediaPlayer1" height="0" width="0" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6">';
+
+
+        var mplayer = '<object id="MediaPlayer1" height="0" width="0" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6" type="application/x-ms-wmp">';
             mplayer += '<param name="autoStart" VALUE="True"/>';
             mplayer += '<param NAME="URL" value=""/>';
             mplayer += '<param NAME="uiMode" value="invisible"/>';
-            mplayer += '<EMBED type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" src="" align="top" width="0" height="0" autostart="False" autosize="0" showcontrols="0" showdisplay="0" EnableContextMenu="0" ShowStatusBar="0"></EMBED>';
+			mplayer += '<param name="<b>SendPlayStateChangeEvents</b>" value="true"/>';
+			mplayer += '<param name="<b>MediaChange</b>" value="true"/>';
+            mplayer += '<EMBED type="application/x-ms-wmp" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" src="" align="top" width="0" height="0" autostart="False" autosize="0" showcontrols="0" showdisplay="0" EnableContextMenu="0" ShowStatusBar="0"></EMBED>';
             mplayer += '</object>';
 //            mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = error()>';
 //            mplayer += '    Radio._Error();';
@@ -33,69 +44,54 @@ function WMPlayer(opt) {
 //            mplayer += '    Radio._Buffering(Start);';
 //            mplayer += '</SCRIPT>'
 //            mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = StatusChange()>'
-//            mplayer += '    Radio._Status();' 
+//            mplayer += '    Radio._Status();'
 //            mplayer += '</SCRIPT>'
+//			  mplayer += '<SCRIPT for="MediaPlayer1" event="PlayStateChange(NewState)">';
+//			  mplayer += 'alert(NewState)';
+//			  mplayer += '</SCRIPT>';
         var div = document.createElement("div");
         div.id = "playerContainer";
         document.body.appendChild(div);
         div.innerHTML = mplayer;
 		this.player = document.getElementById("MediaPlayer1");
 
-}
-
-WMPlayer.prototype._Error = function() {
-	if (this.OnError)
-		this.OnError();
-};
-
-WMPlayer.prototype._Status = function() {
-	  return this.player.status;
-};
-
-WMPlayer.prototype._updateBuffering = function()
-{
-	if (this.OnBuffering)
-		this.OnBuffering(this.player.network.bufferingProgress);
-};
-
-WMPlayer.prototype._Buffering = function(start)
-{
-	if (true == start){ 
-		if (this.OnStartBuffering)
-			Radio.OnStartBuffering();
-		_bufferingTimerID = window.setInterval("Radio._updateBuffering()", 1);
-   }
-   else {
-	  if (Radio.OnEndBuffering)
-		Radio.OnEndBuffering()
-	  window.clearInterval(_bufferingTimerID);
-   }
+		// TODO: Kill onEvent style constraction
+		this.player.attachEvent('MediaChange', function(item){
+			self.onMediaChange(item);
+			$(self).trigger('mediachange',[item]);
+		});
+		this.player.attachEvent('OpenStateChange', function(item){
+			self.onOpenStateChange(item);
+			$(self).trigger('openstatechange',[item]);
+		});
+		this.player.attachEvent('CurrentItemChange', function(item){
+			self.onCurrentItemChange(item);
+			$(self).trigger('currentitemchange',[item]);
+		});
+		this.player.attachEvent('Buffering', function(start){
+			self.onBuffering();
+			$(self).trigger('buffering',[item]);
+			if ( start ) {
+				self.onBufferingStart;
+				$(self).trigger('bufferingstart',[item]);
+			}
+			else {
+				self.onBufferingEnd;
+				$(self).trigger('bufferingend',[item]);
+			}
+		});
+		this.player.attachEvent('Error', function(){
+			self.onError();
+			self.trigger('error');
+		});
 }
 
 //public methods
-WMPlayer.prototype.init = function()
-{
-	var mplayer = '<object id="MediaPlayer" height="0" width="0" classid="' + this._CLSID + '">';
-		mplayer += '<param name="autoStart" VALUE="True"/>';
-		mplayer += '<param NAME="URL" value=""/>';
-		mplayer += '<param NAME="uiMode" value="invisible"/>';
-		mplayer += '<EMBED type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" src="" align="top" width="0" height="0" autostart="False" autosize="0" showcontrols="0" showdisplay="0" EnableContextMenu="0" ShowStatusBar="0"></EMBED>';
-		mplayer += '</object>';
-//		mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = error()>';
-//		mplayer += '    Radio._Error();';
-//		mplayer += '</SCRIPT>';
-//		mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = buffering(Start)>'
-//		mplayer += '    Radio._Buffering(Start);';
-//		mplayer += '</SCRIPT>'
-//		mplayer += '<SCRIPT LANGUAGE = "JScript"  FOR = MediaPlayer1  EVENT = StatusChange()>'
-//		mplayer += '    Radio._Status();'
-//		mplayer += '</SCRIPT>'
-	var div = document.createElement("div");
-	div.id = "playerContainer";
-	document.body.appendChild(div);
-	div.innerHTML = mplayer;
-	var mp = document.getElementById("MediaPlayer");
-}
+
+// TODO check how get status of player
+WMPlayer.prototype.status = function() {
+	  return this.player.status;
+};
 
 WMPlayer.prototype.playURL = function(url)
 {
@@ -106,11 +102,12 @@ WMPlayer.prototype.playURL = function(url)
 
 WMPlayer.prototype.play = function()
 {
+	if ( this.player );
 	if (this._url)
 	{
 		this.player.URL = this._url;
 		this.player.controls.play();
-	}        
+	}
 }
 
 WMPlayer.prototype.stop = function()
@@ -123,6 +120,11 @@ WMPlayer.prototype.setVolume = function(volume)
 	this.player.settings.volume = volume;
 }
 
+WMPlayer.prototype.addVolume = function(volume)
+{
+	this.player.settings.volume += volume;
+}
+
 /*
  * @return number
  * @type number
@@ -130,4 +132,9 @@ WMPlayer.prototype.setVolume = function(volume)
 WMPlayer.prototype.getVolume = function()
 {
 	return this.player.settings.volume;
+}
+
+WMPlayer.prototype.nowPlayed = function()
+{
+	return this.player.controls.currentItem;
 }
