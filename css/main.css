@@ -136,15 +136,11 @@ body.undocked {
 }
 
 .undocked #shorttrackinfo {
-	top: 120px;
+	top: 65px;
 }
 
 #shorttrackinfo.down {
 	top: 65px;
-}
-
-.undocked #shorttrackinfo.down {
-	top: 70px;
 }
 
 #trackname {
@@ -175,7 +171,7 @@ body.undocked {
     background: url("../images/votebar_cont.png") no-repeat scroll 0 -3px #FFFFFF;
     height: 65px;
     left: 18px;
-    top: 60px;
+    top: 150px;
     width: 280px;
     padding: 15px 20px;
 }
@@ -220,25 +216,14 @@ body.undocked {
 	left: 0px;
 }
 
-.docked #trackinfo {
+#trackinfo {
     display: none;
 }
-
 
 .undocked #trackinfo {
-    top: 140px;
-}
-
-.undocked #trackinfo.up #quality {
-    display: none;
-}
-
-.undocked #trackinfo.down {
-    top: 100px;
-}
-
-.undocked #trackinfo.down #quality{
-    display: table-row;
+    top: 90px;
+    font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+    font-size: 10px;
 }
 
 .undocked #trackinfo table {
@@ -248,7 +233,17 @@ body.undocked {
 
 #trackinfo table tr td {
     color: white;
-    font-size: 0.9em;
+    font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+    font-size: 10px;
     vertical-align: top;
     background-color: #101010;
+    overflow: hidden;
+}
+
+.undocked #trackinfo td.name {
+    width: 126px;
+}
+
+.undocked #trackinfo td.value {
+    width: 190px;
 }
