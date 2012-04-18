@@ -80,6 +80,7 @@ AnimeRadioGadget.prototype.onDock = function(){
 
 	$(document.body).removeClass("undocked").addClass("docked").css({height: '100px', width: '130px'});
     $('#trackinfo').hide();
+    this.scrollTrackName();
 
 	backgroundId.src="url(images/docked_glass_frame.png)";
 };
@@ -90,6 +91,7 @@ AnimeRadioGadget.prototype.onUnDock = function(){
 	$(document.body).removeClass("docked").addClass("undocked").css({height: '280px', width: '360px'});
     if (this.trackinfo.fromanime)
         $('#trackinfo').show();
+    this.scrollTrackName();
 	//$('#banner').css({height: '280px', width: '360px'});
 	backgroundId.src="url(images/undocked_glass_frame.png)";
 };
@@ -157,7 +159,7 @@ AnimeRadioGadget.prototype.scrollTrackName = function(){
 		.delay(1000)
 		.animate({left: 0}, offset*20+1500, function(){
 			setTimeout(function(){self.scrollTrackName();}, 100);
-		})
+		});
 };
 
 AnimeRadioGadget.prototype.parseIndexTable = function(){
