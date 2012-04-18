@@ -6,33 +6,40 @@
 	<meta http-equiv="MSThemeCompatible" CONTENT="yes" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<script language="javascript" type="text/javascript" src="js/jquery-1.7.1.js"></script>
-	<script language="javascript" type="text/javascript" src="js/ControlBar.js"></script>
-	<script language="javascript" type="text/javascript" src="js/WMPlayer.js"></script>
 
-	<script language="javascript" type="text/javascript" src="main.js"></script>
 	<!--[if IE 9]>
 	<script language="javascript" type="text/javascript" src="js/MicrosoftAjax.debug.js"></script>
 	<script language="javascript" type="text/javascript" src="js/Sidebar.IntelliSense.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/ie9.css">
 	<![endif]-->
+
+	<script language="javascript" type="text/javascript" src="js/jquery-1.7.1.js"></script>
+	<script language="javascript" type="text/javascript" src="js/ControlBar.js"></script>
+	<script language="javascript" type="text/javascript" src="js/VoteBar.js"></script>
+	<script language="javascript" type="text/javascript" src="js/WMPlayer.js"></script>
+
+	<script language="javascript" type="text/javascript" src="js/JSGadget.js"></script>
+	<script language="javascript" type="text/javascript" src="js/AnimeRadioGadget.js"></script>
+	<script language="javascript" type="text/javascript" src="main.js"></script>
+
 </head>
-<body onload="Init()" class="docked">
+<body onload="" class="undocked">
 <g:background id="backgroundId" />
 	<div id="gadgetContent">
-		<embed height="25" type="application/x-shockwave-flash" width="120" src='http://animeradio.su/swf/head/day.swf'>
-		</embed>
-<!--		<img id="gar_img" src="images\gar.gif"/>-->
-        <!--div id="votebar">
-            <div class="btn">1</div>
-            <div class="btn">2</div>
-            <div class="btn">3</div>
-            <div class="btn">4</div>
-            <div class="btn">5</div>
-            <div class="btn">6</div>
-            <div class="btn">7</div>
-            <div class="btn">8</div>
-        </div-->
-		<div id="text"><pre>Проверка.</pre></div>
+		<object id="banner" type="application/x-shockwave-flash" data='swf/day.swf'>
+			<param name="movie" value="swf/day.swf"/>
+			<img id="gar_img" src="images/gar.gif"/>
+		</object>
+		<div id="shorttrackinfo"><div id="trackname"></div></div>
+		<div id="votebar"></div>
+        <div id="trackinfo">
+            <table>
+                <tr id="fromanime"><td class="name">Трек из аниме</td><td class="value"></td></tr>
+                <tr id="orderedby"><td class="name">Слушателей</td><td class="value"></td></tr>
+                <tr id="quality_s"><td class="name">Качество вешания</td><td class="value"></td></tr>
+                <tr id="listeners"><td class="name">Слушателей</td><td class="value"></td></tr>
+            </table>
+        </div>
 		<div id="bar" ></div>
 	</div>
 <!--</g:background>-->
