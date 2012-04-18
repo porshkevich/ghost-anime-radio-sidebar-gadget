@@ -53,13 +53,13 @@ function AnimeRadioGadget(opt) {
 
 	$(this.cBar).bind('show', function(e){
 		$('#shorttrackinfo').removeClass('down');
-        $('#trackinfo').removeClass('down').addClass('up');
+        $('#trackinfo').removeClass('down');
 		//log(item.name);
 	});
 
 	$(this.cBar).bind('hide', function(e){
 		$('#shorttrackinfo').addClass('down');
-        $('#trackinfo').addClass('down').removeClass('up');
+        $('#trackinfo').addClass('down');
 		//log(item.name);
 	});
 
@@ -79,6 +79,8 @@ AnimeRadioGadget.prototype.onDock = function(){
 	backgroundId.style.width = 0;
 
 	$(document.body).removeClass("undocked").addClass("docked").css({height: '100px', width: '130px'});
+    $('#trackinfo').hide();
+
 	backgroundId.src="url(images/docked_glass_frame.png)";
 };
 
@@ -86,6 +88,8 @@ AnimeRadioGadget.prototype.onUnDock = function(){
 	backgroundId.style.width = 0;
 
 	$(document.body).removeClass("docked").addClass("undocked").css({height: '280px', width: '360px'});
+    if (this.trackinfo.fromanime)
+        $('#trackinfo').show();
 	//$('#banner').css({height: '280px', width: '360px'});
 	backgroundId.src="url(images/undocked_glass_frame.png)";
 };
@@ -133,14 +137,11 @@ AnimeRadioGadget.prototype.onUpdateTrackInfo = function(){
 
 	$('#trackname').html(this.trackinfo.name);
 
-    var content = '';
-    content += '<table>';
-    content += '<tr><td>Трек из аниме</td><td>' + this.trackinfo.fromanime + '</td></tr>';
-    content += '<tr><td>Заказчик</td><td>' + (this.trackinfo.orderedby?this.trackinfo.orderedby:"") + '</td></tr>';
-    content += '<tr id="quality"><td>Качество вещания</td><td>' + this.trackinfo.quality_s + '</td></tr>';
-    content += '<tr><td>Слушателей</td><td>' + this.trackinfo.listeners + '</td></tr>';
-    content += '</table>';
-    $('#trackinfo').html(content);
+    $('.undocked #trackinfo').fadeIn(500);
+    $('#trackinfo #fromanime .value').text(this.trackinfo.fromanime);
+    $('#trackinfo #orderedby .value').text(this.trackinfo.orderedby?this.trackinfo.orderedby:"");
+    $('#trackinfo #quality_s .value').text(this.trackinfo.quality_s);
+    $('#trackinfo #listeners .value').text(this.trackinfo.listeners);
 
 	this.scrollTrackName();
 };
