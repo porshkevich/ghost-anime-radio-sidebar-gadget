@@ -53,13 +53,13 @@ function AnimeRadioGadget(opt) {
 
 	$(this.cBar).bind('show', function(e){
 		$('#shorttrackinfo').removeClass('down');
-        $('#trackinfo').removeClass('down');
+        $('#trackinfo').removeClass('down').addClass('up');
 		//log(item.name);
 	});
 
 	$(this.cBar).bind('hide', function(e){
 		$('#shorttrackinfo').addClass('down');
-        $('#trackinfo').addClass('down');
+        $('#trackinfo').addClass('down').removeClass('up');
 		//log(item.name);
 	});
 
@@ -140,10 +140,15 @@ AnimeRadioGadget.prototype.onUpdateTrackInfo = function(){
 	$('#trackname').html(this.trackinfo.name);
 
     $('.undocked #trackinfo').fadeIn(500);
-    $('#trackinfo #fromanime .value').text(this.trackinfo.fromanime);
+    var link = $('<a>').text(this.trackinfo.fromanime).attr({
+        'href': 'http://www.world-art.ru/search.php?public_search=' + this.trackinfo.fromanime + '&global_sector=all'
+    });
+    
+    $('#trackinfo #fromanime .value').empty().append(link);
     $('#trackinfo #orderedby .value').text(this.trackinfo.orderedby?this.trackinfo.orderedby:"");
     $('#trackinfo #quality_s .value').text(this.trackinfo.quality_s);
     $('#trackinfo #listeners .value').text(this.trackinfo.listeners);
+    $('#trackinfo #raiting_s .value').text(this.trackinfo.raiting_s);
 
 	this.scrollTrackName();
 };
@@ -177,6 +182,7 @@ AnimeRadioGadget.prototype.parseIndexTable = function(){
 			self.trackinfo.quality_n = parseInt($('td:contains(Качество вещания) + td', msg).html(), 10);
 			self.trackinfo.listeners = parseInt($('td:contains(Слушателей) + td', msg).html(), 10);
 			self.trackinfo.rating = parseInt($('li.current-rating:contains(Currently)', msg).html().replace('Currently ', ''), 10);
+            self.trackinfo.raiting_s = $('.ratingblock span', msg).text().split(':')[1];
 			var ajax_data = $('input[name=ajax_data]', msg);
 			if ( ajax_data.length > 0 ) {
 				self.trackinfo.canBeVote = true;
