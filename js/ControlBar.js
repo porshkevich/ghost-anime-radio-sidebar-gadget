@@ -1,76 +1,79 @@
 function ControlBar(opt) {
 	var i;
 	var self = this;
-	
+
 	 this.defaultButtons = ['volumeDe','play','pause','volumeIn','web'];
-	
+
 	/*
 	 * @private
 	 */
 	this.timerId = null;
-	
+
 	if (opt.container != undefined) {
 		this.container = $(opt.container, {
 			id: 'bar',
 			opacity: 0,
-			focusin: this.show,
-			focusout: this.hide});
+			focusin: this.showBar,
+			focusout: this.hideBar});
 	}
 	else
 	{
 		this.container = $('<div/>', {
 			id: 'bar',
 			opacity: 0,
-			focusin: this.show,
-			focusout: this.hide});
+			focusin: this.showBar,
+			focusout: this.hideBar});
 	}
-	
-	// ToDo: ���� ��� ������� ������������ ���������� ����� 1
+
+	// ToDo: пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 1
 	this.container.animate({opacity: 0},'fast');
-	
-	$('body').mouseover(function(){self.show()});
-	$('body').mouseout(function(){self.hide()});
-	
+
+	$('body').mouseover(function(){self.showBar()});
+	$('body').mouseout(function(){self.hideBar()});
+
 	this.buttonDefine(opt.buttons == undefined ? this.defaultButtons : opt.buttons);
-	
+
 	this.hideButton('pause');
 }
 
-ControlBar.prototype.show = function(){
+ControlBar.prototype.showBar = function(){
+	$(this).trigger('show');
 	this.container.stop(true).animate({opacity: 0.7},'slow');
 };
 
-ControlBar.prototype.hide = function(){
-	this.container.stop(true).animate({opacity: 0},'slow');
+ControlBar.prototype.hideBar = function(){
+	var self = this;
+	this.container.stop(true).animate({opacity: 0},'slow', function(){$(self).trigger('hide');});
+
 };
 
 ControlBar.prototype.action = function(action){
 	if (console.log) console.log(action);
 };
 
-ControlBar.prototype.onButtonClick = function(action){
-	if ( action != undefined && action != null ) {
-		
+ControlBar.prototype.onButtonClick = function(button){
+	if ( button != undefined && button.action != undefined && button.action != null ) {
+
 		var self = this;
 
-		var actionFunction = 'on' + action;
-		
-		if ( this[actionFunction] ) this[actionFunction]();
+		var actionFunction = 'on' + button.action;
+
+		if ( this[actionFunction] ) this[actionFunction](button);
 	}
-	
-	
-	if (window.console != undefined && console.log) console.log(action);
+
+
+	if (window.console != undefined && console.log) console.log(button.action);
 	//if (log) log(action);
 };
 
-ControlBar.prototype.onButtonDown = function(action){
+ControlBar.prototype.onButtonDown = function(button){
 	clearInterval(this.timerId);
-	if ( action != undefined && action != null ) {
+	if ( button != undefined && button.action != undefined && button.action != null ) {
 		var self = this;
 		/*
 		 *  TODO: Back to the direct challenge to the 'on' event
 		 */
-		this.timerId = setInterval(function(){self.onButtonClick(action)}, 500);
+		this.timerId = setInterval(function(){self.onButtonClick(button)}, 250);
 	}
 };
 
@@ -80,11 +83,11 @@ ControlBar.prototype.onButtonUp = function(){
 };
 
 ControlBar.prototype.buttonDefine = function(buttons){
-	
+
 	var self = this;
-	
+
 	if ( this.buttons == undefined ) this.buttons = {};
-	
+
 	for ( var i=0, iLen=buttons.length ; i<iLen ; i++ ) {
 		if ( typeof buttons[i] == "string" ){
 			if ( ControlBar.Buttons[buttons[i]] == undefined ) {
@@ -102,9 +105,9 @@ ControlBar.prototype.buttonDefine = function(buttons){
 			}
 		}
 	}
-	
+
 	//this.buttons = $.extend(true, this.buttons, buttons, this.defaultButtons);
-	
+
 	for (var id in this.buttons)
 	{
 		this.buttons[id].img = $('<img />',{
@@ -120,11 +123,11 @@ ControlBar.prototype.buttonDefine = function(buttons){
 				this.src=e.data.src;
 				self.onButtonUp();
 		})
-		.click({CBarAction:this.buttons[id].action},function(e){self.onButtonClick(e.data.CBarAction)})
-		.mousedown({CBarAction:this.buttons[id].action},function(e){self.onButtonDown(e.data.CBarAction)})
+		.click({CBarButton:this.buttons[id]},function(e){self.onButtonClick(e.data.CBarButton)})
+		.mousedown({CBarButton:this.buttons[id]},function(e){self.onButtonDown(e.data.CBarButton)})
 		.mouseup(function(e){self.onButtonUp()})
 		.appendTo(this.container);
-		
+
 		if ( this.buttons[id].callback ) this['on'+this.buttons[id].action] = this.buttons[id].callback;
 	}
 }
