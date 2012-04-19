@@ -70,7 +70,21 @@ function AnimeRadioGadget(opt) {
 
 	this.lastSwfUpdate = new Date();
 	this.timeSwfUpdate = opt.timeSwfUpdate*1000;
+
+	this.hotkeyControl = new HotkeyControl();
+
+
+
+	var hotkeyId = this.hotkeyControl.addHotkey(MOD_CONTROL | MOD_SHIFT, 88, window, "onHotkeyPressed()");
+
+	//$('#gadgetContent').html(hotkeyId);
 }
+
+	function onHotkeyPressed()
+	{
+		window.parent.focus();
+		animeradio.cBar.onPlay();
+	}
 
 AnimeRadioGadget.prototype = new JSGadget();
 AnimeRadioGadget.prototype.constructor = AnimeRadioGadget;

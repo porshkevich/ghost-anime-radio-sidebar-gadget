@@ -35,7 +35,7 @@ System.Contact = function()
     this.filePath = "";
     this.homePhone = "";
     this.mobilePhone = "";
-    this.name = "";  
+    this.name = "";
     this.POBox = "";
     this.postalCode = "";
     this.state = "";
@@ -47,7 +47,7 @@ System.Contact.registerClass("System.Contact");
 System.ContactManager = function()
 {
     /// <summary>Exposes a collection of System.Contact objects.</summary>
-    /// <field name="Contacts" type="Array" elementType="System.Contact">A collection of objects that expose System.Contact methods and properties. Note Objects of type System.Contact can only be accessed through the Contacts Collection. This collection is a member of System.ContactManager.</field>    
+    /// <field name="Contacts" type="Array" elementType="System.Contact">A collection of objects that expose System.Contact methods and properties. Note Objects of type System.Contact can only be accessed through the Contacts Collection. This collection is a member of System.ContactManager.</field>
     this.Contacts = [];
 }
 System.ContactManager.Contacts = [];
@@ -55,13 +55,13 @@ System.ContactManager.registerClass("System.ContactManager");
 
 System.Debug = function()
 {
-    /// <summary>Exposes a method for use in debugging Windows Sidebar gadget script.</summary>    
+    /// <summary>Exposes a method for use in debugging Windows Sidebar gadget script.</summary>
 }
 System.Debug.outputString = function(strOutputString)
 {
     /// <summary>Writes developer-specified debugging information to the console.</summary>
     /// <remarks>The value of strOutputString can only be viewed with a script debugger while the gadget is running.</remarks>
-    /// <param name="strOutputString" type="String">Required. Contains developer-specified information, such as variable values, gadget state data, or function names for display on the debugging console.</param>   
+    /// <param name="strOutputString" type="String">Required. Contains developer-specified information, such as variable values, gadget state data, or function names for display on the debugging console.</param>
 }
 System.Debug.registerClass("System.Debug");
 
@@ -70,7 +70,7 @@ System.Diagnostics.EventLog = function()
     /// <summary>Returns the contents of the specified Event Viewer event log.</summary>
 }
 System.Diagnostics.EventLog.writeEntry = function(strEventLogEntry, intEventType)
-{   
+{
     /// <summary>Used in a gadget to write text entries to a debugging log.</summary>
     /// <param name="strEventLogEntry" type="String">Required. Initialize this string variable to contain the information that should be placed in the diagnostics log.</param>
     /// <param name="intEventType" type="Number" integer="true" elementMayBeNull="true">Optional. Use this integer variable to specify the type of event to log. The default value is 3. 0: Success, 1: Error, 2: Warning, 3: Information.</param>
@@ -79,8 +79,8 @@ System.Diagnostics.EventLog.registerClass("System.Diagnostics.EventLog");
 
 System.Environment = function()
 {
-    /// <summary>Exposes methods and properties used to determine current user session machine characteristics.</summary>        
-    /// <field name="machineName" type="String">The name of the local computer.</field>    
+    /// <summary>Exposes methods and properties used to determine current user session machine characteristics.</summary>
+    /// <field name="machineName" type="String">The name of the local computer.</field>
     this.machineName = "";
 }
 
@@ -109,42 +109,42 @@ System.Gadget = function()
     this.docked = false;
     this.name = "";
     this.opacity = 0;
-    this.path = "";
+    this.path = location ? decodeURI(location.pathname.substring(1).replace(/\/([^/]+)$/, "").replace(/\//g,"\\")) : "";
     this.platformVersion = "";
     this.settingsUI = "";
     this.version = "";
-    this.visible = false;    
+    this.visible = false;
 }
 System.Gadget.background = "";
 System.Gadget.docked = false;
 System.Gadget.name = "";
 System.Gadget.opacity = 0;
-System.Gadget.path = "";
+System.Gadget.path = location ? decodeURI(location.pathname.substring(1).replace(/\/([^/]+)$/, "").replace(/\//g,"\\")) : "";
 System.Gadget.platformVersion = "";
 System.Gadget.settingsUI = "";
 System.Gadget.version = "";
 System.Gadget.visible = false;
-System.Gadget.onDock = function() 
+System.Gadget.onDock = function()
 {
     /// <summary>This event is triggered when the gadget is docked. The specified script code runs when the event occurs.</summary>
 }
-System.Gadget.onSettingsClosed = function() 
+System.Gadget.onSettingsClosed = function()
 {
     /// <summary>This event is triggered when the Settings dialog box for the current gadget is about to close and specifies the script code that runs when the event occurs.</summary>
 }
-System.Gadget.onSettingsClosing = function() 
+System.Gadget.onSettingsClosing = function()
 {
     /// <summary>This event is triggered when the Settings dialog box for the current gadget is being closed, and specifies the script code that runs when the event occurs.</summary>
 }
-System.Gadget.onShowSettings = function() 
+System.Gadget.onShowSettings = function()
 {
     /// <summary>Detects when the Settings dialog box for the current gadget will open and runs the appropriate script code when the event occurs.</summary>
 }
-System.Gadget.onUndock = function() 
+System.Gadget.onUndock = function()
 {
     /// <summary>This event is triggered when a gadget is undocked. The specified script code runs when the event occurs.</summary>
 }
-System.Gadget.visibilityChanged = function() 
+System.Gadget.visibilityChanged = function()
 {
     /// <summary>This event is triggered when the gadget's visibility changes. The specified script code runs when the event occurs.</summary>
 }
@@ -157,7 +157,7 @@ System.Gadget.endTransition = function(intGadgetTransitionType, floatTransitionI
 {
     /// <summary>Called from within a gadget to transition into a new view state from a previous size or view state.</summary>
     /// <param name="intGadgetTransitionType" type="Number" integer="true" elementMayBeNull="false">Required. An integer containing the transition type.</param>
-    /// <param name="floatTransitionInSeconds" type="Number" integer="false" elementMayBeNull="false">Required. A variable of type Float storing the number of seconds for the gadget transition effect.</param>    
+    /// <param name="floatTransitionInSeconds" type="Number" integer="false" elementMayBeNull="false">Required. A variable of type Float storing the number of seconds for the gadget transition effect.</param>
 }
 System.Gadget.close = function()
 {
@@ -186,7 +186,7 @@ System.Gadget.Flyout.onHide = function()
 {
     /// <summary>Event code triggered from within a gadget to specify the script code that runs when gadget flyout prompts are hidden.</summary>
 }
-System.Gadget.Flyout.onShow = function() 
+System.Gadget.Flyout.onShow = function()
 {
     /// <summary>Event code triggered from within a gadget to specify the script code that runs when gadget flyout prompts are shown.</summary>
 }
@@ -199,26 +199,26 @@ System.Gadget.Settings = function()
 System.Gadget.Settings.read = function(strSettingName)
 {
     /// <summary>Called from within a gadget to read a gadget's stored settings.</summary>
-    /// <param name="strSettingName" type="String">Required. String containing the name of the setting to retrieve.</param>    
+    /// <param name="strSettingName" type="String">Required. String containing the name of the setting to retrieve.</param>
     /// <returns type="String">Returns the requested setting value.</returns>
 }
 System.Gadget.Settings.readString = function(strSettingName)
 {
     /// <summary>Called from within a gadget to read the gadget's stored settings without attempting to determine the type of data stored. Note   Use readString and writeString to preserve the integrity of decimal values.</summary>
-    /// <param name="strSettingName" type="String">Required. String containing the name of the setting to retrieve.</param>    
+    /// <param name="strSettingName" type="String">Required. String containing the name of the setting to retrieve.</param>
     /// <returns type="String">Returns the requested setting value.</returns>
 }
 System.Gadget.Settings.write = function(strWriteSettingName, strWriteSettingInit)
 {
     /// <summary>Called from within a gadget to store a setting that is persistent across sessions.</summary>
-    /// <param name="strWriteSettingName" type="String">Required. A string containing the name of the setting to write.</param>    
-    /// <param name="strWriteSettingInit" type="String">Required. A string containing the value of the specified setting name to write for the gadget.</param>        
+    /// <param name="strWriteSettingName" type="String">Required. A string containing the name of the setting to write.</param>
+    /// <param name="strWriteSettingInit" type="String">Required. A string containing the value of the specified setting name to write for the gadget.</param>
 }
 System.Gadget.Settings.writeString = function(strWriteStrSettingName, strWriteStrSettingInit)
 {
     /// <summary>Called from within a gadget to store a setting that is persistent across sessions. Note   Use readString and writeString to preserve the integrity of decimal values.</summary>
-    /// <param name="strWriteStrSettingName" type="String">Required. A string containing the name of the setting to write.</param>    
-    /// <param name="strWriteStrSettingInit" type="String">Required. A string containing the value of the specified setting name to write for the gadget.</param>        
+    /// <param name="strWriteStrSettingName" type="String">Required. A string containing the name of the setting to write.</param>
+    /// <param name="strWriteStrSettingInit" type="String">Required. A string containing the value of the specified setting name to write for the gadget.</param>
 }
 System.Gadget.Settings.registerClass("System.Gadget.Settings");
 
@@ -264,18 +264,18 @@ System.Gadget.SideShow.applicationEvent = function()
 System.Gadget.SideShow.addImage = function(intSideShowContentID, strSideShowImageName)
 {
     /// <summary>Displays an image on a SideShow device.</summary>
-    /// <param name="intSideShowContentID" type="Number" integer="true">Required. An integer value representing the content ID of the image to display on a SideShow device.</param>    
-    /// <param name="strSideShowImageName" type="String">Required. A string value representing the path and file name of the image to display on the SideShow device.</param>        
+    /// <param name="intSideShowContentID" type="Number" integer="true">Required. An integer value representing the content ID of the image to display on a SideShow device.</param>
+    /// <param name="strSideShowImageName" type="String">Required. A string value representing the path and file name of the image to display on the SideShow device.</param>
 }
 System.Gadget.SideShow.addText = function(intSideShowContentID, strSideShowText)
 {
     /// <summary>Displays text on a SideShow device.</summary>
-    /// <param name="intSideShowContentID" type="Number" integer="true">Required. An integer value representing the content ID of the image to display on a SideShow device.</param>    
-    /// <param name="strSideShowText" type="String">Required. A string value representing the text to display on the SideShow device.</param>        
+    /// <param name="intSideShowContentID" type="Number" integer="true">Required. An integer value representing the content ID of the image to display on a SideShow device.</param>
+    /// <param name="strSideShowText" type="String">Required. A string value representing the text to display on the SideShow device.</param>
 }
 System.Gadget.SideShow.remove = function(strSideShowContentID)
 {
-    /// <summary>Removes the content specified by a content ID from a SideShow device. </summary>  
+    /// <summary>Removes the content specified by a content ID from a SideShow device. </summary>
     /// <param name="strSideShowContentID" type="String">Required. A string value representing the content ID of the image or text to remove from the SideShow device.</param>
 }
 System.Gadget.SideShow.removeAll = function()
@@ -297,22 +297,22 @@ System.Machine = function()
     /// <field name="availableMemory" type="Number" integer="true">An integer specifying the amount of available memory (MB).</field>
     /// <field name="processorArchitecture" type="String">A string containing the processor type.</field>
     /// <field name="totalMemory" type="Number" integer="true"></field>
-    this.CPUs = new Array(); 
+    this.CPUs = new Array();
     this.availableMemory = 0;
-    this.processorArchitecture = "";    
+    this.processorArchitecture = "64";
     this.totalMemory = 0;
 }
 System.Machine.CPUs = Array();
 System.Machine.availableMemory = 0;
-System.Machine.processorArchitecture = "";
+System.Machine.processorArchitecture = "64";
 System.Machine.totalMemory = 0;
 System.Machine.registerClass("System.Machine");
 
 System.Machine.CPU = function()
 {
     /// <summary>Exposes properties associated with a CPU.</summary>
-    /// <field name="name" type="String">Name of the CPU.</field>    
-    /// <field name="usagePercentage" type="Number" integer="false">A Floating-point variable containing the result of the processor check, in decimal form, that represents the consumed percentage of CPU capacity.</field>    
+    /// <field name="name" type="String">Name of the CPU.</field>
+    /// <field name="usagePercentage" type="Number" integer="false">A Floating-point variable containing the result of the processor check, in decimal form, that represents the consumed percentage of CPU capacity.</field>
     this.name = "";
     this.usagePercentage = 0;
 }
@@ -323,12 +323,12 @@ System.Machine.CPU.registerClass("System.Machine.CPU");
 System.Machine.PowerStatus = function()
 {
     /// <summary>Exposes properties and events for determining and managing power status.</summary>
-    /// <field name="batteryCapacityRemaining" type="Number" integer="true">Estimated amount of battery power remaining, in seconds.</field>        
+    /// <field name="batteryCapacityRemaining" type="Number" integer="true">Estimated amount of battery power remaining, in seconds.</field>
     /// <field name="batteryCapacityTotal" type="Number" integer="true">An integer representing the estimated number of seconds of remaining power of a fully-charged battery.</field>
-    /// <field name="batteryPercentRemaining" type="Number" integer="true">An integer representing the percentage of remaining battery power available.</field>    
-    /// <field name="batteryStatus" type="Number" integer="true">An integer that indicates the charge state of the battery.</field>        
-    /// <field name="batteryStatus" type="Boolean">Returns true if the power adapter is charging the battery and providing power to the system. Returns false if the power adapter is not providing power to the computer, and the computer is running on battery power and depleting the battery.</field>        
-    /// <field name="isPowerLineConnected" type="Boolean">Returns true if the power adapter is plugged in and providing power to the system. Returns false if the power adapter is not plugged in and the computer is running on battery power.</field>        
+    /// <field name="batteryPercentRemaining" type="Number" integer="true">An integer representing the percentage of remaining battery power available.</field>
+    /// <field name="batteryStatus" type="Number" integer="true">An integer that indicates the charge state of the battery.</field>
+    /// <field name="batteryStatus" type="Boolean">Returns true if the power adapter is charging the battery and providing power to the system. Returns false if the power adapter is not providing power to the computer, and the computer is running on battery power and depleting the battery.</field>
+    /// <field name="isPowerLineConnected" type="Boolean">Returns true if the power adapter is plugged in and providing power to the system. Returns false if the power adapter is not plugged in and the computer is running on battery power.</field>
     this.batteryCapacityRemaining = 0;
     this.batteryCapacityTotal = 0;
     this.batteryPercentRemaining = "";
@@ -359,12 +359,12 @@ System.Machine.PowerStatus.EnumBatteryStatus = function()
     /// <field name="noBattery" type="Number" integer="true" static="true"></field>
     /// <field name="unknown" type="Number" integer="true" static="true"></field>
 }
-System.Machine.PowerStatus.EnumBatteryStatus.prototype = 
-{    
+System.Machine.PowerStatus.EnumBatteryStatus.prototype =
+{
     medium: 0,
     high: 1,
     low: 2,
-    critical: 4,  
+    critical: 4,
     noBattery: 128,
     unknown: 255
 }
@@ -382,14 +382,14 @@ System.MessageStore.registerClass("System.MessageStore");
 System.MessageStoreFolder = function()
 {
     /// <summary>Exposes a collection of System.MessageStoreMessage object types.</summary>
-    /// <field name="Messages" type="Array" elementType="System.MessageStoreMessage">A collection of System.MessageStoreMessage object types.</field>    
-    /// <field name="messageCount" type="Number" integer="true">The number of messages in a folder.</field>            
-    /// <field name="unreadMessageCount" type="Number" integer="true">The number of unread messages in a folder.</field>                
+    /// <field name="Messages" type="Array" elementType="System.MessageStoreMessage">A collection of System.MessageStoreMessage object types.</field>
+    /// <field name="messageCount" type="Number" integer="true">The number of messages in a folder.</field>
+    /// <field name="unreadMessageCount" type="Number" integer="true">The number of unread messages in a folder.</field>
     /// <field name="name" type="String">Folder name.</field>
     this.Messages = [];
     this.messageCount = 0;
     this.unreadMessageCount = 0;
-    this.name = "";    
+    this.name = "";
 }
 System.MessageStoreFolder.registerClass("System.MessageStoreFolder");
 System.MessageStoreFolder.Messages = [];
@@ -403,7 +403,7 @@ System.MessageStoreMessage = function()
     /// <field name="body" type="String">Contents of the body of a message.</field>
     /// <field name="from" type="String">Contents of the From field of a message.</field>
     /// <field name="subject" type="String">Contents of the Subject field of a message.</field>
-    /// <field name="to" type="String">Contents of the To field of a message.</field>    
+    /// <field name="to" type="String">Contents of the To field of a message.</field>
     this.body = "";
     this.from = "";
     this.subject = "";
@@ -414,7 +414,7 @@ System.MessageStoreMessage.registerClass("System.MessageStoreMessage");
 System.Network.Wireless = function()
 {
     /// <summary>The object properties and events enable a gadget to detect wireless network interface settings on the Microsoft Windows system that the gadget is running on. </summary>
-    /// <field name="address" type="String">Used in a gadget to determine the IP address of the active network adapter where the gadget is running.</field>    
+    /// <field name="address" type="String">Used in a gadget to determine the IP address of the active network adapter where the gadget is running.</field>
     /// <field name="ipv6Address" type="String">Used in a gadget to determine the IP Version 6.0 address on the active network adapter that the gadget is running on.</field>
     /// <field name="primaryDNSAddress" type="String">Called in a gadget to determine the IP address of the first available Domain Name System (DNS) server on the network that the machine running the gadget is connected to.</field>
     /// <field name="secureConnection" type="Boolean">Used in a gadget to determine whether the current connection is secure.</field>
@@ -470,7 +470,7 @@ System.Shell.drive = function(strDrive)
 {
     /// <summary>Retrieves a collection associated with a System.ShellDrive object.</summary>
     /// <param name="strDrive" type="String">Required. A String representing the symbolic drive letter of the storage device on the system.</param>
-    /// <returns type="System.ShellDrive">Returns an instance of a System.ShellDrive object representing the specified drive. If the method fails, returns undefined.</returns>    
+    /// <returns type="System.ShellDrive">Returns an instance of a System.ShellDrive object representing the specified drive. If the method fails, returns undefined.</returns>
 }
 System.Shell.execute = function(strFileOrUrl, strParams, strDirectory, strAction)
 {
@@ -483,8 +483,8 @@ System.Shell.execute = function(strFileOrUrl, strParams, strDirectory, strAction
 System.Shell.itemFromFileDrop = function(strDrive)
 {
     /// <summary>Retrieves a collection associated with a System.Shell.Item object. </summary>
-    /// <param name="strDrive" type="String">Required. A String that represents the System.Shell.Item object of the item in the file system.</param>    
-    /// <returns type="System.ShellDrive">Returns an instance of a System.ShellDrive object representing the specified drive. If the method fails, returns undefined.</returns>        
+    /// <param name="strDrive" type="String">Required. A String that represents the System.Shell.Item object of the item in the file system.</param>
+    /// <returns type="System.ShellDrive">Returns an instance of a System.ShellDrive object representing the specified drive. If the method fails, returns undefined.</returns>
 }
 System.Shell.itemFromPath = function(strPath)
 {
@@ -512,7 +512,7 @@ System.Shell.saveFileDialog = function(strPath, strFilter)
 {
     /// <summary>Triggers a prompt that displays the standard Microsoft Windows File Save dialog box to enable a user to save data created in the gadget to a file.</summary>
     /// <param name="strPath" type="String">Required. A string containing the path for the File Save operation.</param>
-    /// <param name="strFilter" type="String">Required. A string of file name extensions and descriptions. This filter is in the format "Description:Extension Description:Extension::" and quotation marks are required. (Example: "Text File:*.txt:Reg File:*.reg::")</param>        
+    /// <param name="strFilter" type="String">Required. A string of file name extensions and descriptions. This filter is in the format "Description:Extension Description:Extension::" and quotation marks are required. (Example: "Text File:*.txt:Reg File:*.reg::")</param>
     /// <returns type="String">A string containing the resulting path after the file save operation ends.</returns>
 }
 System.Shell.registerClass("System.Shell");
@@ -520,10 +520,10 @@ System.Shell.registerClass("System.Shell");
 System.Shell.Folder = function()
 {
     /// <summary>Enables a Windows Sidebar gadget to mimic Microsoft Windows Explorer file management operations, such as copying, moving, and obtaining item information within folders. </summary>
-    /// <field name="Items" type="Array" elementType="System.Shell.Item">Note  Objects of type System.Shell.Item can only be accessed through the Items Collection. The Items Collection is a member of System.Shell.Folder.</field>        
-    /// <field name="Parent" type="System.Shell.Folder">Enables a Sidebar gadget to detect the parent of a selected folder that the user intends to perform a file operation on, such as copying or moving. With this value, a gadget can mimic operations that a user might initiate in the Windows Explorer or the Windows Desktop.</field>        
+    /// <field name="Items" type="Array" elementType="System.Shell.Item">Note  Objects of type System.Shell.Item can only be accessed through the Items Collection. The Items Collection is a member of System.Shell.Folder.</field>
+    /// <field name="Parent" type="System.Shell.Folder">Enables a Sidebar gadget to detect the parent of a selected folder that the user intends to perform a file operation on, such as copying or moving. With this value, a gadget can mimic operations that a user might initiate in the Windows Explorer or the Windows Desktop.</field>
     /// <field name="Self" type="System.Shell.Folder">Returns information about the selected instance of a folder object.</field>
-    this.Items = [];    
+    this.Items = [];
     this.Parent = new Object();
     this.Self = new Object();
 }
@@ -552,7 +552,7 @@ System.Shell.Folder.newFolder = function(strNewFolderName, intFlags)
 System.Shell.Folder.parse = function(strFilePath)
 {
     /// <summary>Used to return a Folder object and items contained in the folder when the path to the folder is specified.</summary>
-    /// <param name="strFilePath" type="String">Required. String specifying the file path to the folder.</param>    
+    /// <param name="strFilePath" type="String">Required. String specifying the file path to the folder.</param>
     /// <returns type="System.Shell.Folder">An instance of a System.Shell.Folder object that represents the folder at a specified location.</returns>
 }
 System.Shell.Folder.registerClass("System.Shell.Folder");
@@ -582,7 +582,7 @@ System.Shell.Item = function()
     this.path = "";
     this.SHFolder = new Object();
     this.size = 0;
-    this.type = "";    
+    this.type = "";
 }
 System.Shell.Item.invokeVerb = function(strVerb)
 {
@@ -651,7 +651,7 @@ System.ShellDrive = function()
     this.rootDirectory = "";
     this.totalFreeSpace = 0;
     this.totalSize = 0;
-    this.volumeLabel = "";    
+    this.volumeLabel = "";
 }
 System.ShellDrive.registerClass("System.ShellDrive");
 
