@@ -1,0 +1,1 @@
+Windows Sidebar Gadget for GhostAnimeRadio Project include player, informer, calendar
